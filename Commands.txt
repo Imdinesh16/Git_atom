@@ -326,6 +326,11 @@ kubectl -n monitoring scale statefulsets eric-pm-server --replicas=0
 kubectl -n monitoring get pvc
 kubectl -n monitoring scale statefulsets eric-pm-server --replicas=2
 
+HC command
+ cd //var/lib/eccd/container-images.d/erikube/ansible/erikube
+ //var/lib/eccd/container-images.d/erikube/ansible/erikube> sudo ansible-playbook -i //mnt/config/inventory/ibd_inventory_file.ini healthcheck.yml
+ kubectl get secrets -A
+
 
 EO Commands
 To do HC on all EO components
