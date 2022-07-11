@@ -1,0 +1,374 @@
+IPMI commands
+pmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 mc info
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 hpm check
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 fru print
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 sel time get
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 pef info
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 pef status
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 pef list
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 sdr elist
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 chassis status
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 sensor list
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.72.179 sel elist
+ipmitool -I lanplus -H 10.59.9.103 -U admin -P BmCaDmIn sensor list | grep HDD
+
+ipmitool -H 10.9.204.168 -U admin -P cmb9.admin user set password 2 BMCadmin12345@
+
+
+To Find the scale IO compute in HCV zone
+
+for i in `fuel node | grep ready |egrep "compute|scale" |awk '{print $5}'`; do d=`ssh -q $i scli --query_cluster |awk -F" " '{print $3" "$4}'` ; echo $i : $d; done;
+
+
+ScaleIO Commands
+
+scli --query_all
+scli --query_cluster
+scli --query_all_sds
+scli --query_all_sdc
+scli --mdm --login --username admin --password Sysadmin123
+scli --query_storage_pool --storage_pool_name SAS_Pool --protection_domain_name SIO-Domain-1
+
+#### To change the space % policy-  there is no impact in changing the Spare for running configs 
+scli --modify_spare_policy --protection_domain_id '6927fa4c00000000' --storage_pool_name 'SAS_Pool' --spare_percentage 6
+scli --query_sdc_to_sds_disconnections
+scli --query_sds_device_info --sds_id baff9c9f00390000 --all_devices
+scli --query_sds_device_info --sds_name compute-222001-701401135 --all_devices
+      We can use this command from the mdm admin account to list the volumes:
+#for h in $(scli --query_all_volumes | grep "Volume ID" |awk '{print $3}'); do echo $h; scli --query_volume --volume_id $h; done
+
+scli --query_sds --sds_name compute-2400-600601106
+
+scli --remove_sds_device --sds_id c2621c3200000003 --device_path /dev/nvme2n1 
+
+scli --remove_sds_device --sds_id c2621c3200000003 --device_path /dev/nvme3n1
+
+scli --modify_spare_policy --protection_domain_name SIO-Domain-1 --storage_pool_name SSD_Pool --spare_percentage 2
+
+
+scli --set_capacity_alerts_threshold --capacity_high_threshold 99 --capacity_critical_threshold 100 --all_storage_pools
+scli --unmap_volume_from_sdc --volume_id 87b511bd00000086 --sdc_name compute-2400-600601011
+scli --query_sdc --sdc_name compute-2400-600601011
+
+
+
+OPENSTACK commands
+openstack volume snapshot create --volume 08718144-af9a-4e28-99a5-b1d65cc18b00 --force Testsnaphot
+openstack volume show 08718144-af9a-4e28-99a5-b1d65cc18b00
+openstack volume show 08718144-af9a-4e28-99a5-b1d65cc18b00 --fit-width
+service cinder-volume status
+nova list --all-tenants --fields name,host,status
+nova list --all-tenants --fields instance_name,host,name,status,power_state,task_state
+systemctl restart cinder-backup
+openstack volume service list
+openstack security group list
+openstack  availability zone list
+neutron net-list
+ neutron port-list 
+neutron subnet-show <id>
+openstack console log show <vm id>
+openstack compute service set --disable --disable-reason "Hardware issue" compute-4300-316100218.domain.tld nova-compute
+openstack compute service set compute-4300-316100218.domain.tld nova-compute --enable
+nova availability-zone-list
+neutron l2-gateway-connection-list
+openstack image create --disk-format qcow2 --container-format bare --shared --file /var/lib/glance/TXNMS/NSP_21_6_sros-vm.qcow2 NSP_21_6_P_sros-vm
+openstack image add project 4365fbf4-0ff4-4231-bdab-dac103920c5d 4c8c5d1510b344dab0b054702bef5a02
+neutron net-list
+neutron subnet-show
+openstack stack failures list <stack id> --long
+openstack stack delete <stack id> --debug            ---> will provide full details of stack deletion 
+cinder snapshot-create <volume id> --name <name to be present>
+nova image-create <server id> <name>
+glance image-download --file SMS001VP222001MCO003-Snapshot_17092021 458f75ad-75d3-4f45-bd9f-294b42c0ee28 ( in the CIC itself login nexenta oartition and execute from there (right side)
+image-list --property checksum=a4bb4982cd9efa49e2b7bcbf18284315
+openstack server image create 753deda9-8983-4c09-82ca-c92a4c803cb7 --name SMS006VP222001-Snapshot_30092021
+cinder snapshot-create 07c055df-a82b-466e-82d7-1b7430d36d15 –name TxNms_Backup_Volume_NAD001VM002400_02072021_2226
+neutron port-update ccbd0ed6-3dfd-4431-af29-4a2d921abb38 --port_security_enabled=False
+
+:~# openstack security group show <id>
+cinder list --all |grep -i detaching
+cinder reset-state <volume_id> --attach-status detached
+cinder reset-state 162c0e2b-c1ba-482a-adcb-fa824aeaaba7 --attach-status detached
+nova volume-detach <server> <volume>
+for i in `openstack server show 681e08ce-6116-4679-a34d-85fd1f1e537a --fit | grep "delete_on_termination='False'" | awk '{print $4}' | sed 's/id=//g' | tr -d "'"`; do echo $i; cinder show $i | grep -w "name"; done  -----> for particular worked node volume list 
+openstack server show 1862a387-f5c5-46d7-91a5-e74d1e31a3e0 --fit | grep 1033524b-8256-496a-86fb-ccf38ceaf9e2 | awk '{print $4}' 
+cinder reset-state 1033524b-8256-496a-86fb-ccf38ceaf9e2 --state error
+cinder reset-state 1033524b-8256-496a-86fb-ccf38ceaf9e2 --state available
+
+To check the humidity alarm in all computes 
+for n in $(fuel node | awk -F '|' '$7 ~ /compute/ {print $3}' | sort); do echo ${n} ; ssh -q ${n} "ipmitool sensor list | grep Humi" ; done
+for n in $(fuel node | awk -F '|' '$7 ~ /compute/ {print $3}' | sort); do echo ${n},$(date),$(ssh -q ${n} ipmitool sensor list | grep Humi_Inlet) >> /tmp/Humidity.txt & done
+for i in `fuel node | grep compute- | awk '{print $5}'`;do j=`ssh -q $i 'ipmitool sel elist |grep -i "Monitor ASIC/IC Humi_Inlet | Upper Non-critical going high | Asserted |" |tail -5'`;echo "$i";echo "$j";done 
+
+
+
+CRM commands
+crm_mon -1rf
+crm resource restart p_cinder-volume
+crm resource restart p_rabbitmq-server
+2) service pacemaker restart
+3) crm resource restart p_mysqld
+
+
+
+Switch commands
+pager off 
+port-phy-show
+port-xcvr-show
+port-stats-show
+cluster-show
+fabric-node-show
+lldp-show
+switch-setup-show
+admin-ipmi-show
+vrouter-bfd-neighbor-show
+vrouter-bgp-neighbor-show
+port-phy-show [-]vrouter-interface-show vrrp-state slave
+vrouter-interface-show vrrp-state master
+system-stats-show 
+admin-ipmi-show format switch,ip
+port-stats-show sort-desc ierrs,
+openvswitch-hwvtep-manager-show
+log-event-show
+stp-state-show
+trunk-stats-show
+vrouter-bfd-neighbor-show
+port-stats-show sort-desc ierrs,
+switch-status-show
+vrouter-show
+switch-local 
+port-phy-show port 17,18
+port-xcvr-show port 17,18
+port-config-modify <port_ID> disable/enable
+switch <switchname> <switchname> <switchname> port-congig-modify port <portno> disable or enable
+vflow-show
+vflow-show | grep -i flowtrace
+# openssl crl2pkcs7 -nocrl -certfile /var/nvos/cert/cacerts.pem | openssl pkcs7 -print_certs -text -noout | egrep "(Subject:|Not|Issuer)" 
+# openssl x509 -in /usr/nvos/cert/cacert.pem -text -noout | grep Not 
+# openssl x509 -in /usr/nvos/cert/core.pem -text -noout | grep Not 
+# openssl x509 -in /usr/nvos/cert/newswitch.pem -text -noout | grep Not
+
+
+
+
+
+Junos Switch commands 
+show ethernet-switching table interface ge-1/0/44
+
+Vrouter (VYOS)
+sh arp
+sh ip ospf neighbor 
+sh vrrp 
+sh int
+
+
+
+RTE Commands
+rteadmin show all
+drbd-overview
+crm_mon -1rf
+service corosync status
+service pacemaker status
+virsh list --all
+crm cluster stop/start/status
+drbdadm secondary r0
+drbdadm connect --discard-my-data r0
+rteadmin repair passive
+ rteadmin repair active
+ passwd sysadmin
+ rteadmin show all
+ rteadmin switch
+
+
+CEE commands
+ceereplace --remove-name <Compute name> --force
+python -m odltools netvirt show flow stale -i 192.168.123.4 -t 8181 -u cscadm -w vhamodelhcv1   ----TO find the stale flows
+python -m odltools netvirt show flow stale-bindings -i 192.168.123.4 -t 8181 -u cscadm -w vhamodelhcv1
+*****************************************************************************************************************************************************************************************************
+curl -u cscroot:<sdnc_root_password> -X GET http://192.168.120.4:8181/restconf/config/itm:transport-zones     ---->sdnc root password can be found in the config.yaml 	 
+curl -u cscroot:<sdnc_root_password> -X DELETE http://192.168.120.4:8181/restconf/config/itm:transport-zones
+
+
+check you can print the DPN that you want to delete:
+curl -u cscroot:<sdnc_root_password> -X GET http://192.168.120.4:8181/restconf/config/itm:transport-zones/transport-zone/TZA/subnets/255.255.255.255%2f32/vteps/231381987686467//
+
+e.g.
+root@cic-1:~# curl -u cscroot:<sdnc_root_password> -X GET http://192.168.120.4:8181/restconf/config/itm:transport-zones/transport-zone/TZA/subnets/255.255.255.255%2f32/vteps/231381987686467//
+{"vteps":[{"portname":"","dpn-id":231381987686467,"ip-address":"10.1.6.88","weight":1,"option-of-tunnel":false}]}
+root@cic-1:~#
+
+
+#delete the unwanted TEP from TZA transport zone:
+curl -u cscroot:<sdnc_root_password> -X DELETE http://192.168.120.4:8181/restconf/config/itm:transport-zones/transport-zone/TZA/subnets/255.255.255.255%2f32/vteps/231381987686467//
+
+*****************************************************************************************************************************************************************************************************
+
+
+
+python -m odltools netvirt cleanup  flow stale-bindings -i 192.168.123.4 -t 8181 -u cscadm -w vhamodelhcv1 -----------> dont do stale flow delete it impact 
+
+
+
+
+python -m odltools netvirt show flows  stale -i <IP> -t 8181  -u cscadm -w <odl-password> --metaonly
+python -m odltools netvirt cleanup  flows  stale -i <IP> -t 8181 -u cscadm -w <odl-password>
+
+
+
+Fuel commands
+get_vfuel_info --name --primary
+get_vfuel_info --name --secondary
+
+Collect printout of 'free -m'
+Collect printout of 'top -n 2 -b -o +%MEM'
+Collect printout of 'ps -ef'
+Release memory by command "pkill -f 'python /usr/bin/healthcheck.py'"
+fuel node --node-id 240 --delete-from-db --force    ------ To delete the discover compute form fuel DB
+validate_config_yaml /mnt/cee_config/config.yaml
+
+fuel node --node-id 279 --delete-from-db --force 
+ceereplace –repair 
+fuel-utils check_all
+fuel plugins --list
+fuel2 task list
+fuel2 taks show <taskid>
+fuel-utils check_all
+fuel2 node list
+
+
+watchmen-client active-alarm-list -tz 'Australia/Sydney'
+openstack stack event list
+
+
+
+SDNC HC
+cd /var/www/nailgun/plugins/ericsson_sdnc-2.1/
+./cee_sdnc_verify_setup_sanity.sh --username=cscadm --password=Ericsson1234
+
+display app-status
+display all-dpns
+display routing ip bgp vpnv4 all neighbors
+display tep-show-state
+
+
+General Command 
+find /mnt/backup/VNF/vENM/backup/EMS001VP002400/*.success -type f -mtime +30 -exec rm {} \;
+netstat -nr 
+ssh-keygen -f "/root/.ssh/known_hosts" -R 192.168.0.11
+ovs-ofctl dump-ports br-int
+ovs-ofctl -OOpenflow13 show br-int |
+
+
+
+Kube Commands
+cat stale-volume-list 
+for i in `cat stale-volume-list`; do kubectl get pv -o wide | grep $i ; done 
+for i in `cat volume-list.txt`; do kubectl get pv -o wide | grep $i | awk '{print $1}'; done
+kubectl describe pods eric-data-search-engine-data-0 -n pcg001cp002400   | grep 'Node:\|Events' -C5 
+
+
+
+CCD-Chec with Openstack
+
+for i in `nova list --all-tenants | grep ccd001vp003100 | grep worker | awk '{print $2}'`; do echo $i; openstack server show $i --fit | grep delete_on_ | wc -l ; done   -----> to find the volume attach to the worker VM
+kubectl get pod -A --no-headers | wc -l
+kubectl cordon worker-stand-pool-bgp-3hs8zphp-ccd001vp003100
+kubectl drain worker-stand-pool-bgp-3hs8zphp-ccd001vp003100 --ignore-daemonsets --delete-local-data
+kubectl get pod -A | grep -i eric-pc-mm-controller-0
+kubectl describe pod -n pcc001cp003100 eric-pc-mm-controller-0 
+kubectl get pod -A
+kubectl get pod -A | grep -v Running
+kubectl get node
+kubectl uncordon worker-stand-pool-bgp-3hs8zphp-ccd001vp003100
+kubectl get events -A | grep -iv Normal
+kubectl get events -A | grep -iv Warning |egrep -i "critical|major"
+for i in `kubectl get node -o wide | grep "worker-stand" | awk '{print $6}'`; do echo $i; ssh -q $i "df -h | grep vda"; done
+kubectl get nodes -o wide
+ 
+openstack stack output show e1a0e2dc-f1ab-4df4-a406-7fc6a400c7fa director_external_vip
+
+#kubectl get statefulsets -n monitoring |grep eric-pm-server
+ 
+#kubectl get pods -n monitoring -o wide |grep -e eric-pm-server-0 -e eric-pm-server-1
+ 
+#kubectl edit statefulset eric-pm-server -n monitoring
+ 
+#Containers -> eric-pm-server ->resources-> limits-> memory: < Desired value >
+ 
+Save it.
+ 
+Monitor eric-pm-server pods, it will start to delete and recreate with new value.
+cat /etc/eccd/eccd_image_version.ini
+
+
+kubectl get statefulset -n monitoring
+kubectl -n monitoring scale statefulsets eric-pm-server --replicas=0
+kubectl -n monitoring get pvc
+kubectl -n monitoring scale statefulsets eric-pm-server --replicas=2
+
+
+EO Commands
+To do HC on all EO components 
+ecm_test/health_check.pl    ---> run on any blade server
+
+
+Certificate 
+openssl x509 -inform DER -in vim004vm002400hapxy.vodafone.com.au\ 90FD447975FBC4EFA8E175F5330C186D.cer -out cee-vim004vm002400hapxy.crt   --- to convert .cer to .crt 
+openssl x509 -in cee-vim004vm002400hapxy.crt -text   ----to read the certtificate in text format
+openssl verify -verbose -CAfile ca-bundle.crt ctrl.crt    -- to verify all server issuing and root all are in same signing auth
+
+
+
+OVS
+ovs-tcpdump -i vhufcaac91b-a5 --mirror-to vhu-mirr | grep -i ARP
+ovs-ofctl -OOpenflow13 dump-flows br-int table=52 |grep -i 00:00:5e:00:01:2d
+ovs-ofctl mod-port br-int <vhuport-id> down
+ovs-ofctl mod-port br-int <vhuport-id> up
+
+CCM Commands
+pg_dump -U postgres hds-ccm-kv > db.sql --> Db dump 
+
+MYSQL commands
+mysql 
+select * from images where name = '<image name>';
+
+
+SDITool
+
+sditool ha status --resources
+
+
+
+Mount and unmount steps
+unmount glance : umount /var/lib/glance
+if umount is successful then try to run : xfs_repair /dev/mapper/image-glance
+If the umount does not happen , then edit /etc/fstab and comment out the line (#) staring with:
+/dev/mapper/image-glance
+and save changes
+then reboot .
+After reboot run : xfs_repair /dev/mapper/image-glance
+then edit /etc/fstab and remove comment symbol (#) from 
+/dev/mapper/image-glance
+and save changes
+then you can run: mount  /var/lib/glance
+
+
+)xfs_repair -L /dev/mapper/image-glance
+
+2)xfs_repair /dev/mapper/image-glance
+
+
+
+
+
+
