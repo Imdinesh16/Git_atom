@@ -94,6 +94,13 @@ image-list --property checksum=a4bb4982cd9efa49e2b7bcbf18284315
 openstack server image create 753deda9-8983-4c09-82ca-c92a4c803cb7 --name SMS006VP222001-Snapshot_30092021
 cinder snapshot-create 07c055df-a82b-466e-82d7-1b7430d36d15 –name TxNms_Backup_Volume_NAD001VM002400_02072021_2226
 neutron port-update ccbd0ed6-3dfd-4431-af29-4a2d921abb38 --port_security_enabled=False
+nova migrate <vm id>
+nova resize-confirm <vm id>
+openstack compute service set --enable compute-2400-700801015.domain.tld nova-compute
+
+image update with id parameters match with EO
+glance image-create --name centos7-jmeter-dns --id c862eb52-390d-4d19-b154-3782022f0caf --visibility private --disk-format qcow2 --container-format bare --file centos7-jmeter-dns --progress
+
 
 :~# openstack security group show <id>
 cinder list --all |grep -i detaching
