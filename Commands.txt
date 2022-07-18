@@ -311,6 +311,7 @@ kubectl cluster-info dump
 
 #kubectl exec -it <podname> -n <namespace> -c <containername> -- df -h
 
+kubectl logs csi-cinder-controllerplugin-0 -n kube-system --all-containers --tail=100  ------> to the Erros in ECCD cluster
 
 openstack stack output show e1a0e2dc-f1ab-4df4-a406-7fc6a400c7fa director_external_vip
 
@@ -333,9 +334,11 @@ kubectl -n monitoring scale statefulsets eric-pm-server --replicas=0
 kubectl -n monitoring get pvc
 kubectl -n monitoring scale statefulsets eric-pm-server --replicas=2
 
+kubectl exec -it eric-vnflcm-service-0 -n xnfmmlt --vnflcm vim list
+
 HC command
  cd //var/lib/eccd/container-images.d/erikube/ansible/erikube
- //var/lib/eccd/container-images.d/erikube/ansible/erikube> sudo ansible-playbook -i //mnt/config/inventory/ibd_inventory_file.ini healthcheck.yml
+   sudo ansible-playbook -i //mnt/config/inventory/ibd_inventory_file.ini healthcheck.yml
  kubectl get secrets -A
 
 
@@ -391,3 +394,15 @@ then you can run: mount  /var/lib/glance
 
 
 virsh domblklist <vm id>  ---------------> To check the mount status of the vm
+
+sar -d output for disk utilization
+sar -r output for RAM utilization
+sar -S output for swap utilization
+
+
+dig +noall +answer @10.36.16.16 control1.ocp001pp003100.vodafone.com.au    ---> DNS check
+
+
+EO Commands
+ Core vm
+  grctl show status   ---> to the GR setup of EO
