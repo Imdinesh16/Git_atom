@@ -59,6 +59,7 @@ scli --modify_spare_policy --protection_domain_name SIO-Domain-1 --storage_pool_
 scli --set_capacity_alerts_threshold --capacity_high_threshold 99 --capacity_critical_threshold 100 --all_storage_pools
 scli --unmap_volume_from_sdc --volume_id 87b511bd00000086 --sdc_name compute-2400-600601011
 scli --query_sdc --sdc_name compute-2400-600601011
+scli --query_all_volumes --storage_pool_name SSD_Pool --protection_domain_name SIO-Domain-1
 
 
 
@@ -391,6 +392,9 @@ then you can run: mount  /var/lib/glance
 )xfs_repair -L /dev/mapper/image-glance
 
 2)xfs_repair /dev/mapper/image-glance
+
+
+lvremove /dev/mapper/image-glance 
 
 
 virsh domblklist <vm id>  ---------------> To check the mount status of the vm
