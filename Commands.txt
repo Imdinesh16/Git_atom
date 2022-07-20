@@ -118,6 +118,9 @@ for n in $(fuel node | awk -F '|' '$7 ~ /compute/ {print $3}' | sort); do echo $
 for n in $(fuel node | awk -F '|' '$7 ~ /compute/ {print $3}' | sort); do echo ${n},$(date),$(ssh -q ${n} ipmitool sensor list | grep Humi_Inlet) >> /tmp/Humidity.txt & done
 for i in `fuel node | grep compute- | awk '{print $5}'`;do j=`ssh -q $i 'ipmitool sel elist |grep -i "Monitor ASIC/IC Humi_Inlet | Upper Non-critical going high | Asserted |" |tail -5'`;echo "$i";echo "$j";done
 
+cinder retype --migration-policy on-demand volume_id volume_type
+cinder retype --migration-policy on-demand 0f03648d-e879-4965-81e0-4bd84c90e0c5 Thick_SSD  --> To migrate from thick ssd to sas
+
 
 
 CRM commands
@@ -394,7 +397,7 @@ then you can run: mount  /var/lib/glance
 2)xfs_repair /dev/mapper/image-glance
 
 
-lvremove /dev/mapper/image-glance 
+lvremove /dev/mapper/image-glance
 
 
 virsh domblklist <vm id>  ---------------> To check the mount status of the vm
