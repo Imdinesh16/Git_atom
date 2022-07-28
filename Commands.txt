@@ -24,6 +24,12 @@ ipmitool -I lanplus -H 10.59.9.103 -U admin -P BmCaDmIn sensor list | grep HDD
 
 ipmitool -H 10.9.204.168 -U admin -P cmb9.admin user set password 2 BMCadmin12345@
 
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.136.51 sol activate
+
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.136.51 mc reset cold
+
+
+
 
 To Find the scale IO compute in HCV zone
 
@@ -100,8 +106,7 @@ nova resize-confirm <vm id>
 openstack compute service set --enable compute-2400-700801015.domain.tld nova-compute
 
 image update with id parameters match with EO
-glance image-create --name centos7-jmeter-dns --id c862eb52-390d-4d19-b154-3782022f0caf --visibility private --disk-format qcow2 --container-format bare --file centos7-jmeter-dns --progress
-
+glance image-create --id c862eb52-390d-4d19-b154-3782022f0caf --name 'centos7-jmeter-dns' --disk-format qcow2 --container-format bare --owner 3bd099d40c30492f9c0c4c456616eab2 --visibility private --file centos7-jmeter-dns  --progress
 
 :~# openstack security group show <id>
 cinder list --all |grep -i detaching
@@ -181,6 +186,11 @@ sh arp
 sh ip ospf neighbor
 sh vrrp
 sh int
+show configuration | display set | match 0/0/21
+show interfaces terse | match 0/0/21
+delete interfaces ge-0/0/21 disable
+set interfaces ge-0/0/21 unit 0 family ethernet-switching vlan members 2
+commit
 
 
 
@@ -408,6 +418,14 @@ sar -S output for swap utilization
 
 
 dig +noall +answer @10.36.16.16 control1.ocp001pp003100.vodafone.com.au    ---> DNS check
+
+md5sum <image name>
+
+snoop -o /tmp/i40e1.icmp.snoop -qd i40e1 icmp
+ping -c <ip>
+
+
+
 
 
 EO Commands
