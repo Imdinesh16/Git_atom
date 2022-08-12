@@ -1,5 +1,5 @@
 IPMI commands
-pmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 mc info
+ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 mc info
 
 ipmitool -I lanplus -U admin -P BmCaDmIn -H 10.50.138.129 hpm check
 
@@ -244,6 +244,10 @@ python -m odltools netvirt cleanup  flow stale-bindings -i 192.168.123.4 -t 8181
 python -m odltools netvirt show flows  stale -i <IP> -t 8181  -u cscadm -w <odl-password> --metaonly
 python -m odltools netvirt cleanup  flows  stale -i <IP> -t 8181 -u cscadm -w <odl-password>
 
+ovs-ofctl -OOpenflow13 dump-ports-desc br-int | grep tap
+ovs-vsctl list mirror
+ovs-vsctl show |grep -i error -C5
+
 
 
 Fuel commands
@@ -405,6 +409,7 @@ then you can run: mount  /var/lib/glance
 )xfs_repair -L /dev/mapper/image-glance
 
 2)xfs_repair /dev/mapper/image-glance
+xfs_repair -f /dev/mapper/image-glance
 
 
 lvremove /dev/mapper/image-glance
@@ -431,3 +436,11 @@ ping -c <ip>
 EO Commands
  Core vm
   grctl show status   ---> to the GR setup of EO
+
+Splunk Commands
+indicies
+
+index=nfvi_mano_ericsson host="*nru*" "*nrua09pp005515*"
+index=nfvi_mano_ericsson host = ccma01vp005515
+index=nfvi_mano_ericsson *compute-4300-316100223*
+index=nfvi_mano_ericsson host="*nru*" "*nrua09pp002400*"
