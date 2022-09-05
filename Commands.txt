@@ -125,6 +125,13 @@ for i in `fuel node | grep compute- | awk '{print $5}'`;do j=`ssh -q $i 'ipmitoo
 
 cinder retype --migration-policy on-demand volume_id volume_type
 cinder retype --migration-policy on-demand 0f03648d-e879-4965-81e0-4bd84c90e0c5 Thick_SSD  --> To migrate from thick ssd to sas
+neutron agent-list
+openstack compute service list
+neutron agent-delete <dhcp agent id>
+neutron agent-delete <odl l2 id>
+openstack compute service delete <compute id>
+
+
 
 
 
@@ -165,7 +172,6 @@ vrouter-show
 switch-local
 port-phy-show port 17,18
 port-xcvr-show port 17,18
-port-config-modify <port_ID> disable/enable
 switch <switchname> <switchname> <switchname> port-congig-modify port <portno> disable or enable
 vflow-show
 vflow-show | grep -i flowtrace
@@ -444,3 +450,9 @@ index=nfvi_mano_ericsson host="*nru*" "*nrua09pp005515*"
 index=nfvi_mano_ericsson host = ccma01vp005515
 index=nfvi_mano_ericsson *compute-4300-316100223*
 index=nfvi_mano_ericsson host="*nru*" "*nrua09pp002400*"
+
+Nexenta commands
+bundle create
+alert cases --all
+alert cases --verbose --uuid a7ba1e57-ea67-4461-afbc-8a69ad1946e7
+alert list -u 71af9891-2fe9-cbcc-f418-b6771433e700
