@@ -1,0 +1,89 @@
+Certificate renewal 3/7/22
+
+Model SAV raised -->REQ000000828499 CRQ000000845105 --> Model SAV and releted solution certificate renewal 16/6 to 24/6
+   - Still not approved
+   -Certificates downloaded and in NSN I folder
+   -Completed in Model SAV and in observation
+   - EO-CM cert update we need to do it both the site(active and passive) but restart of caha and jboss should be in active site only
+   - Closed
+NN SAV
+   - Certificate CSR raised -142442 --> waiting for approval
+   - CSR id -->FC2638729F71A27351CEA965B6A1C989
+   - certs in NSN (i)
+   - CRQ000000848494 -NN- SAV CIC haproxy and connected solutions certificate renewal from 21/6 to 24/6 ---> cloud and hybrid cloud pending
+   - CR complted and certs updated in CEE EO-CM and EVNFM with vaild up to 14-06-2024 Under observation
+   - Closed
+EK HCV
+   - Certificate CSR raised ->142480 --> waiting for approval
+   - CSR ID -->DB0D5C3462EC23560D31B4B37ADEA175
+   - Certs downloaded
+   - CRQ000000848507 EK- HCV_SAV  CIC haproxy and connected solutions certificate renewal  from 23/06/2022 to 28/06/2022
+   - Certificate updated in the ENV expiry by 14/6/2024  under observation
+   - Closed
+EK SAV
+   - Certificate CSR raised -> 142487  --> waiting for approval
+   - CSR id--> 0C2022EEBB96B56C1E2D7CFC4B86A641
+   - Certs downloaded and need to plan CR
+   - CRQ000000848507 EK- HCV_SAV  CIC haproxy and connected solutions certificate renewal  from 23/06/2022 to 28/06/2022
+   - Certificate updated in the ENV expiry by 14/6/2024  under observation
+   - Closed
+
+GT HCV
+   - Certificate CSR raised -> 142495  --> waiting for approval
+   - CSR ID --> 6598F658F42526DB63C8E236F680FF50
+   - Certs downloaded and need to plan CR
+   - CRQ000000848508- GT- HCV_CIC haproxy and connected solutions certificate renewal from 28/06/2022 to 1/07/2022
+
+
+
+Certificate renewal 15/7
+
+NN HCV
+   -CR raised CRQ000000851726
+   -certificate need to raise
+   - CSR rasied -->153293
+   - CSR ID --> 	1CBA1729A5B64C4E07D0FB621E0D71CD
+   - CR completed and ECCD pending need to chase the CSR team
+   - ECCD completed with warning CSR analysis  under way
+
+MY HCV
+   -CR raised CRQ000000851903
+   -certificate need to raise
+   - CSR rasise -->153262
+   - CSR ID -->A859C38AE2F694EE012FCD02F8C57D42
+   - CR Done EVNFM need to be updated
+   -EVNFM Done but ECCD have some error Need to follow up --->0004037828
+- ECCD completed with warning CSR analysis  under way
+
+
+
+MY SAV
+   - CR raised CRQ000000851903
+   -certificate need to raise
+   - CSR raised -->153287
+   - CSR ID --> 	0022DFFC1F690B4A39C14E782A407AC1
+   - CR done EVNFM and ECCD need to be updated
+   -EVNFM Done but ECCD have some error Need to follow up --->0004037828
+    - ECCD completed with warning CSR analysis  under way
+
+
+
+
+
+
+Entrust portal
+https://certificates.vodafone.com.au/csres/request/do/Home
+
+
+nfvece1p003215                 | https://vim001vp003215hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece2p003100                 | https://vim002vp003100hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece2p004300                 | https://vim002vp004300hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece3p002400                 | https://vim003vp002400hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece3p003100                 | https://vim003vp003100hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece3p005515                 | https://vim002vp005515hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece3p006000                 | https://vim002vp006000hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece4p002400                 | https://vim004vp002400hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece4p222001                 | https://vim004vp222001hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece5p002400                 | https://vim005vp002400hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece5p222001                 | https://vim005vp222001hapxy.vodafone.com.au:5000/v3/                   | 300
+nfvece6p222001                 | https://vim006vp222001hapxy.vodafone.com.au:5000/v3/                   | 300

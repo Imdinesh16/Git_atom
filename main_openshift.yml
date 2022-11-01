@@ -1,0 +1,70 @@
+---
+# Tasks file for jumphost to build OCP for non baremetal deployments
+
+# ############################
+# Install and configure OpenShift Installation and support software
+# ############################
+
+- name: Create ssh_key directory if it does not exist
+  file:
+    path: /root/ocp_bootstrapping/ssh_keys/
+    state: directory
+    mode: '0755'
+
+- name: Generate ssh-keypair for the cluster
+  openssh_keypair:
+    type: ed25519
+    path: /root/ocp_bootstrapping/ssh_keys/id_ed25519
+    mode: '0400'
+
+- name: Download and install binaries
+  block:
+    - name: Create directory if it does not exist
+      file:
+        path: /root/ocp_bootstrapping/packages/
+        state: directory
+        mode: '0755'
+
+    - name: Download OpenShift installer and clients
+      get_url:
+        url: "{{ item.url }}"
+        dest: /root/ocp_bootstrapping/packages/
+      loop: "{{ ocp_packages }}"
+
+    - name: Unpack installer and clients
+      unarchive:
+        src: /root/ocp_bootstrapping/packages/{{ item.name }}.tar.gz
+        dest: /usr/local/bin/
+        remote_src: yes
+        owner: root
+        group: root
+        mode: 0755
+        exclude:
+          - README.md
+          - LICENSE
+      loop: "{{ ocp_packages }}"
+      register: unpack_packages
+
+    - name: restorecon selinux context
+      shell: |
+        restorecon /usr/local/bin/{{ item.binary }}
+      loop: "{{ ocp_packages }}"
+
+- name: generate OCP config directories
+  file:
+    path: /root/ocp_bootstrapping/{{ item }}
+    state: directory
+    mode: '0755'
+  loop:
+    - ignition
+    - backup
+
+- name: Setup bash completion for oc
+  shell: |
+    oc completion bash >/etc/bash_completion.d/oc
+  when: unpack_packages.changed
+
+- name: Setup bash completion for openshift-install
+  shell: |
+    openshift-install completion bash >/etc/bash_completion.d/openshift-install
+  when: unpack_packages.changed

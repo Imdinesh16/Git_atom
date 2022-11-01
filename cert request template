@@ -1,0 +1,316 @@
+[ req ]
+default_bits = 2048
+default_keyfile = key.pem
+default_md = sha256
+distinguished_name = subject
+string_mask = utf8only
+req_extensions = req_ext
+prompt = no
+
+[ subject ]
+countryName = AU
+stateOrProvinceName = New South Wales
+localityName = Sydney
+organizationName = VODAFONE HUTCHISON AUSTRALIA PTY LIMITED
+organizationalUnitName = IP Networks
+commonName = vim004vp002400hapxy.vodafone.com.au
+#emailAddress = arshad.Masih@vodafone.com.au
+
+[ x509_ext ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ req_ext ]
+subjectKeyIdentifier = hash
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ alternate_names ]
+DNS.1 = vim004vp002400hapxy.vodafone.com.au
+
+
+
+openssl req -out vim004vp002400hapxy.csr -newkey rsa:2048 -nodes -keyout vim004vp002400hapxy.key -config vim004vp002400hapxy_config.txt
+
+#####EK HCV ######
+
+[ req ]
+default_bits = 2048
+default_keyfile = key.pem
+default_md = sha256
+distinguished_name = subject
+string_mask = utf8only
+req_extensions = req_ext
+prompt = no
+
+[ subject ]
+countryName = AU
+stateOrProvinceName = New South Wales
+localityName = Sydney
+organizationName = VODAFONE HUTCHISON AUSTRALIA PTY LIMITED
+organizationalUnitName = IP Networks
+commonName = vim004vp222001hapxy.vodafone.com.au
+#emailAddress = arshad.Masih@vodafone.com.au
+
+[ x509_ext ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ req_ext ]
+subjectKeyIdentifier = hash
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ alternate_names ]
+DNS.1 = vim004vp222001hapxy.vodafone.com.au
+
+
+
+openssl req -out vim004vp222001hapxy.csr -newkey rsa:2048 -nodes -keyout vim004vp222001hapxy.key -config vim004vp222001hapxy_config.txt
+
+Certificate should be renewed to CEE env which going to expiry by 3/7
+
+
+######  EK SAV #######
+
+
+[ req ]
+default_bits = 2048
+default_keyfile = key.pem
+default_md = sha256
+distinguished_name = subject
+string_mask = utf8only
+req_extensions = req_ext
+prompt = no
+
+[ subject ]
+countryName = AU
+stateOrProvinceName = New South Wales
+localityName = Sydney
+organizationName = VODAFONE HUTCHISON AUSTRALIA PTY LIMITED
+organizationalUnitName = IP Networks
+commonName = vim005vp222001hapxy.vodafone.com.au
+#emailAddress = arshad.Masih@vodafone.com.au
+
+[ x509_ext ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ req_ext ]
+subjectKeyIdentifier = hash
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ alternate_names ]
+DNS.1 = vim005vp222001hapxy.vodafone.com.au
+
+
+
+openssl req -out vim005vp222001hapxy.csr -newkey rsa:2048 -nodes -keyout vim005vp222001hapxy.key -config vim005vp222001hapxy_config.txt
+
+
+
+
+####### GT HCV ####
+
+
+
+[ req ]
+default_bits = 2048
+default_keyfile = key.pem
+default_md = sha256
+distinguished_name = subject
+string_mask = utf8only
+req_extensions = req_ext
+prompt = no
+
+[ subject ]
+countryName = AU
+stateOrProvinceName = Queensland
+localityName = Gold Coast
+organizationName = VODAFONE HUTCHISON AUSTRALIA PTY LIMITED
+organizationalUnitName = IP Networks
+commonName = vim002vp004300hapxy.vodafone.com.au
+#emailAddress = arshad.Masih@vodafone.com.au
+
+[ x509_ext ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ req_ext ]
+subjectKeyIdentifier = hash
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ alternate_names ]
+DNS.1 = vim002vp004300hapxy.vodafone.com.au
+
+
+
+openssl req -out vim002vp004300hapxy.csr -newkey rsa:2048 -nodes -keyout vim002vp004300hapxy.key -config vim002vp004300hapxy_config.txt
+
+
+
+
+
+[ req ]
+default_bits = 2048
+default_keyfile = key.pem
+default_md = sha256
+distinguished_name = subject
+string_mask = utf8only
+req_extensions = req_ext
+prompt = no
+
+[ subject ]
+countryName = AU
+stateOrProvinceName = Victoria
+localityName = Mount Waverley
+organizationName = VODAFONE HUTCHISON AUSTRALIA PTY LIMITED
+organizationalUnitName = IP Networks
+commonName = vim002vp003100hapxy.vodafone.com.au
+#emailAddress = arshad.Masih@vodafone.com.au
+
+[ x509_ext ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ req_ext ]
+subjectKeyIdentifier = hash
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ alternate_names ]
+DNS.1 = vim002vp003100hapxy.vodafone.com.au
+
+
+
+openssl req -out vim002vp003100hapxy.csr -newkey rsa:2048 -nodes -keyout vim002vp003100hapxy.key -config vim002vp003100hapxy_config.txt
+
+
+
+
+
+
+
+[ req ]
+default_bits = 2048
+default_keyfile = key.pem
+default_md = sha256
+distinguished_name = subject
+string_mask = utf8only
+req_extensions = req_ext
+prompt = no
+
+[ subject ]
+countryName = AU
+stateOrProvinceName = Victoria
+localityName = Mount Waverley
+organizationName = VODAFONE HUTCHISON AUSTRALIA PTY LIMITED
+organizationalUnitName = IP Networks
+commonName = vim003vp003100hapxy.vodafone.com.au
+#emailAddress = arshad.Masih@vodafone.com.au
+
+[ x509_ext ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ req_ext ]
+subjectKeyIdentifier = hash
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ alternate_names ]
+DNS.1 = vim003vp003100hapxy.vodafone.com.au
+
+
+
+openssl req -out vim003vp003100hapxy.csr -newkey rsa:2048 -nodes -keyout vim003vp003100hapxy.key -config vim003vp003100hapxy_config.txt
+
+
+
+
+
+
+[ req ]
+default_bits = 2048
+default_keyfile = key.pem
+default_md = sha256
+distinguished_name = subject
+string_mask = utf8only
+req_extensions = req_ext
+prompt = no
+
+[ subject ]
+countryName = AU
+stateOrProvinceName = New South Wales
+localityName = Sydney
+organizationName = VODAFONE HUTCHISON AUSTRALIA PTY LIMITED
+organizationalUnitName = IP Networks
+commonName = vim003vp002400hapxy.vodafone.com.au
+#emailAddress = arshad.Masih@vodafone.com.au
+
+[ x509_ext ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ req_ext ]
+subjectKeyIdentifier = hash
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alternate_names
+nsComment = "OpenSSL Generated Certificate"
+
+[ alternate_names ]
+DNS.1 = vim003vp002400hapxy.vodafone.com.au
+
+
+
+openssl req -out vim003vp002400hapxy.csr -newkey rsa:2048 -nodes -keyout vim003vp002400hapxy.key -config vim003vp002400hapxy_config.txt
