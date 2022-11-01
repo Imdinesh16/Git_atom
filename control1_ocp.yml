@@ -1,0 +1,60 @@
+heat_template_version: pike
+
+description: This template deploys Redhat Openshift control instances
+
+resources:
+
+  ctr1-port1:
+    type: OS::Neutron::Port
+    properties:
+      name: control1_ocpadm001vp002400-Port-1
+      network: OCPADM001VP002400-OAM
+      fixed_ips:
+        - ip_address: '10.50.54.11'
+      port_security_enabled: "True"
+      security_groups: 'OM_default_RHOP_OCP'
+
+  ctr1-port2:
+    type: OS::Neutron::Port
+    properties:
+      name: control1_ocpadm001vp002400-Port-2
+      network: OCPADM001VP002400-STR-1
+      fixed_ips:
+        - ip_address: '10.50.54.139'
+      port_security_enabled: false
+
+  ctr1-port3:
+    type: OS::Neutron::Port
+    properties:
+      name: control1_ocpadm001vp002400-Port-3
+      network: OCPADM001VP002400-STR-2
+      fixed_ips:
+        - ip_address: '10.50.54.171'
+      port_security_enabled: false
+
+  ctr1-port4:
+    type: OS::Neutron::Port
+    properties:
+      name: control1_ocpadm001vp002400-Port-4
+      network: OCPADM001VP002400-STR-3
+      fixed_ips:
+        - ip_address: '10.50.54.203'
+      port_security_enabled: false
+
+#Volume Attachment  003b9608-b0b8-4e6a-bcca-5701d10123a6
+
+  opststvm1:
+    type: OS::Nova::Server
+    properties:
+      name: control1.ocpadm001vp002400.vodafone.com.au
+      flavor: CM-RHOP-OCP-C4M16D0
+      networks:
+        - port: {get_resource: ctr1-port1}
+        - port: {get_resource: ctr1-port2}
+        - port: {get_resource: ctr1-port3}
+        - port: {get_resource: ctr1-port4}
+      block_device_mapping: [{"volume_id": 1c32b546-62bb-4bf3-8d16-86aa20f19548, "device_name": "vda"}]
+      availability_zone: HCVAZGENA01P002400
+      keyname:  rhel-provision_CLDINF
+      scheduler_hints:
+        group: antiaffinity-gp

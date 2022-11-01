@@ -1,0 +1,30 @@
+Openshift non functional MOP query
+
+1. 5.1 --> procedure -->Remove the underlying storage device from relevant worker node.
+2. 11 --> Use the following command to track provisioning of persistent volumes for devices that match the deviceInclusionSpec. It can take a few minutes to provision persistent volumes.
+            - Need to ask PV will create automatically
+
+
+
+
+
+Openshift HC
+
+3.1.2 ---> Can we create machine HC yaml   -------------> Cloud need to prepare
+3.1.5 ---> Need to ask how to back and restore the ETCD (partical example )   ---------------> Need sandbox cluster for the pratical test (Redhat will provide docs)
+3.1.6---> Need to get the severity list from redhat/TPG --> how to resolve the current critical/Major alarms docs
+3.1.7 --> Need to ask about the completion status --> clarification on many sync groups
+3.1.8 ---> Some pods like ldap are in crashloopback state need to get clarified
+3.1.9 ---> it shows pods name alone need of restart counts and date values
+3.1.10 ---> Need Full HC mop on networking/ SDN and OVN details and checks
+3.1.11   ---> Clarification on Storage spaces(it has around 50 TB/ Where cluster got the storage) --> Need clarification on console dashboard
+3.1.13   ---> Need info on the routes (check the HC artifacts)
+3.1.14  ---> Need info on the routes (check the HC artifacts)
+3.1.15  ---> Need to clarify about the ceritificate in ACM
+
+
+
+3.2---> Administrator guide
+4.  ---> Openshift monitoring ---> Need to check after the TOL(Monitoring)
+    - Need to verify the configuration of log forwarding syslog, promethus fluentd webhook-->Netcool
+    - Need clarity on splunk config and syslog forwarder (arcsight siem)
