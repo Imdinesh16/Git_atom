@@ -381,7 +381,7 @@ for i in `fuel node | grep compute- | awk '{print $5}'`;do j=`ssh -q $i 'ipmitoo
 
 cpu_layout.py  --> It will give the socket info of the compute 
 
-
+ssh-keygen -f known_hosts -R 10.50.65.5
 
 
 
@@ -473,6 +473,10 @@ kubectl get pod -A -o wide | grep -v '1/1' | grep -v '2/2' | grep -v '3/3'| grep
 kubectl get po -A -o wide | grep -vE 'Running|STATUS|Completed'
 
 sudo ansible-playbook -i /mnt/config/inventory/ibd_inventory_file.ini /var/lib/eccd/container-images.d/erikube/ansible/erikube/healthcheck.yml
+
+sudo supportconfig  ---> To take support bundle
+kubectl get all -A -o wide
+kubectl cluster-dump info
 
 
 
