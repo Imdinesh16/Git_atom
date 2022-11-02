@@ -561,6 +561,14 @@ EO Commands
   grctl show status   ---> to the GR setup of EO
 CRU1 /root/ecm_test ./healthcheck.pl ---> to run the HC of EO 
 
+SG Check of Tenant and sub tenant
+
+-	Login on Core VM and go to userstore.
+# cd /app/ecm/security/openAm/ds/userstore/bin
+-	Execute below mention command, you can change tenant name as per your query:
+# ./ldapsearch -p 2389 -b "o=M_ENTSRV,dc=ecm,dc=ericsson,dc=com" -D "cn=Directory Manager" -w amadmin123 -h ecmapp -s 'sub' "(&(objectclass=ecmRole))" | grep M_ENTSRV
+
+
 Splunk Commands
 indicies
 
